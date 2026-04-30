@@ -1,0 +1,33 @@
+name: BankSystem CI Automation
+
+# Kích hoạt (trigger) khi có sự kiện push hoặc pull_request
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # Chạy trên máy ảo Linux của GitHub
+
+    steps:
+      - name: 1. Clone code từ kho lưu trữ
+        uses: actions/checkout@v4
+
+      - name: 2. Cài đặt môi trường Java (JDK 11)
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: maven # Tự động cache các thư viện để lần sau build nhanh hơn
+
+      - name: 3. Thực thi vòng đời Build và Test (Maven Lifecycle)
+        # Lệnh package tự động chạy qua các pha: validate -> compile -> test -> package
+        run: mvn -B clean package
+
+      - name: 4. Lưu trữ và xác minh tệp .jar (Upload Artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: banksystem-executable-jar
+          path: target/*.jar # Lấy tất cả file .jar sinh ra trong thư mục target
