@@ -11,6 +11,6 @@ public class SavingsAccountTest {
     // Nạp thêm 20k
     account.deposit(20000.0);
     // Kiểm tra xem số dư có đúng là 70k không
-    assertEquals(99999.0, account.getBalance(), "Số dư sau khi nạp tiền chưa chính xác!");
+    assertEquals(70000.0, account.getBalance(), "Số dư sau khi nạp tiền chưa chính xác!");
   }
 }
