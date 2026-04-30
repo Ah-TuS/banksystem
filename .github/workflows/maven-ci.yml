@@ -1,10 +1,16 @@
 name: BankSystem CI Automation
 
+# 1. TRIGGER: Chạy khi có push hoặc tạo Pull Request vào nhánh main/master
 on:
   push:
-    branches: [ "**" ] # Kích hoạt khi push lên BẤT KỲ nhánh nào
+    branches: [ "main" ]
   pull_request:
-    branches: [ "main", "master" ]
+    branches: [ "main" ]
+
+# MỚI: Cấp quyền cho workflow được phép viết bình luận vào Pull Request
+permissions:
+  contents: read
+  pull-requests: write
 
 jobs:
   build:
@@ -44,3 +50,12 @@ jobs:
         with:
           name: jacoco-coverage-report-${{ matrix.os }}
           path: target/site/jacoco/
+
+      # 2. INLINE FEEDBACK: Thêm action đăng comment tự động
+      - name: Phản hồi Checkstyle tự động lên Pull Request
+        # Chỉ chạy nếu đây là Pull Request, OS là Ubuntu, và chạy kể cả khi build lỗi (always)
+        if: always() && github.event_name == 'pull_request' && matrix.os == 'ubuntu-latest'
+        uses: dbelyaev/action-checkstyle@v0.7.5
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
