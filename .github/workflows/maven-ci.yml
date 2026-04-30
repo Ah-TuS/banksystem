@@ -2,7 +2,7 @@ name: BankSystem CI Automation
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [ "**" ] # Kích hoạt khi push lên BẤT KỲ nhánh nào
   pull_request:
     branches: [ "main", "master" ]
 
