@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
  * và danh sách giao dịch.
  */
 public abstract class Account {
+  int _loi_checkstyle = 1; // Cố tình lỗi checkstyle để test Automated Code Review
   // Vi phạm: Đặt tên hằng số không đúng chuẩn (phải là UPPER_SNAKE_CASE)
   public static final String CHECKING_TYPE = "CHECKING";
   public static final String SAVINGS_TYPE = "SAVINGS";

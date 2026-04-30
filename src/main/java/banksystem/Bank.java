@@ -38,11 +38,8 @@ public class Bank {
   }
 
   // Vi phạm: Thụt đầu dòng (Indentation) lung tung và Javadoc thiếu tag @param
-  /**
-   * Set danh sach khach hang.
-   *
-   * @param customerList danh sach khach hang
-   */
+
+  // Cố tình xóa Javadoc để test Automated Code Review
   public void setCustomerList(List<Customer> customerList) {
     if (customerList == null) {
       this.customerList = new ArrayList<>();
