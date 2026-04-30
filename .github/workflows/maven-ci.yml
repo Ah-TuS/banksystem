@@ -28,11 +28,19 @@ jobs:
           cache: maven
 
       - name: Thực thi vòng đời Build và Test
-        run: mvn -B clean package
+        # Đổi từ package sang verify để JaCoCo kích hoạt bộ kiểm tra rule
+        run: mvn -B clean verify
 
       - name: Lưu trữ tệp .jar
         uses: actions/upload-artifact@v4
         with:
-          # Gắn tên hệ điều hành vào tên file để dễ phân biệt
           name: banksystem-executable-jar-${{ matrix.os }}
           path: target/*.jar
+
+      - name: Trích xuất và lưu trữ báo cáo JaCoCo
+        # if: always() đảm bảo rằng dù build có bị FAIL (do không đạt 80%) thì báo cáo vẫn được tải lên để bạn xem lại
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-coverage-report-${{ matrix.os }}
+          path: target/site/jacoco/
