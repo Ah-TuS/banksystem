@@ -1,0 +1,26 @@
+<configuration>
+  <!-- 1. Cấu hình in Log ra màn hình Terminal (ConsoleAppender) -->
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <!-- Định dạng: Thời gian [Thread] Mức_độ Tên_Class - Tin_nhắn -->
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <!-- 2. Cấu hình lưu Log vào tệp vật lý (FileAppender) theo yêu cầu đề bài -->
+  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <!-- Tệp log sẽ được tạo ra ở thư mục gốc của dự án -->
+    <file>logs/banksystem.log</file>
+    <append>true</append> <!-- Ghi tiếp vào file cũ thay vì ghi đè -->
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <!-- 3. Kích hoạt cả 2 Appender -->
+  <root level="debug"> <!-- Bắt mọi log từ cấp độ DEBUG trở lên (INFO, WARN, ERROR) -->
+    <appender-ref ref="CONSOLE" />
+    <appender-ref ref="FILE" />
+  </root>
+
+</configuration>
