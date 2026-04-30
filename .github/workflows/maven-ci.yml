@@ -51,11 +51,11 @@ jobs:
           name: jacoco-coverage-report-${{ matrix.os }}
           path: target/site/jacoco/
 
-      # 2. INLINE FEEDBACK: Thêm action đăng comment tự động
+      # 2. INLINE FEEDBACK: Thêm action đăng comment tự động (Đã đổi sang Reviewdog xịn hơn)
       - name: Phản hồi Checkstyle tự động lên Pull Request
         # Chỉ chạy nếu đây là Pull Request, OS là Ubuntu, và chạy kể cả khi build lỗi (always)
         if: always() && github.event_name == 'pull_request' && matrix.os == 'ubuntu-latest'
-        uses: dbelyaev/action-checkstyle@v0.7.5
+        uses: dbelyaev/action-checkstyle@v3.8.0 # <--- Đổi thành bản mới
         with:
-          github_token: ${{ secrets.github_token }}
+          github_token: ${{ secrets.GITHUB_TOKEN }} # Đổi thành viết hoa toàn bộ cho chuẩn
           reporter: github-pr-review
