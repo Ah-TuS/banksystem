@@ -122,6 +122,21 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Plugin đóng gói file JAR và chỉ định Main-Class -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.5.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!-- Đường dẫn đến class chứa hàm main() của bạn -->
+                            <mainClass>banksystem.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>

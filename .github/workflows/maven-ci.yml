@@ -3,7 +3,7 @@ name: BankSystem CI Automation
 # 1. TRIGGER: Chạy khi có push hoặc tạo Pull Request vào nhánh main/master
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "**" ]
   pull_request:
     branches: [ "main" ]
 
