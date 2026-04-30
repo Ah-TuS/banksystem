@@ -25,7 +25,7 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
-          cache: maven # Caching
+          cache: maven # Cached
 
       - name: Thực thi vòng đời Build và Test
         # Đổi từ package sang verify để JaCoCo kích hoạt bộ kiểm tra rule
